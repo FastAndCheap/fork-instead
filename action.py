@@ -16,13 +16,15 @@ import sys
 
 import github
 
+
 def envvar_as_bool(envvar_name: str) -> bool:
     """Convert a string environment variable to a boolean."""
-    envvar = os.environ["INPUT_ASSIGN_TO_USER"].lower()
+    envvar = os.environ[envvar_name].lower()
     if envvar not in ("y", "yes", "n", "no", "true", "false", "on", "off"):
         print(f"'{envvar_name}' must be a YAML boolean value")
         sys.exit(1)
     return envvar in ("y", "yes", "true", "on")
+
 
 try:
     token = os.environ["INPUT_GITHUB_TOKEN"]
@@ -30,7 +32,7 @@ try:
     message = os.environ["INPUT_MESSAGE"]
 
     on_issues = envvar_as_bool("INPUT_ON_ISSUES")
-    on_pull_requests = envvar_as_bool("INPUT_LABEL")
+    on_pull_requests = envvar_as_bool("INPUT_ON_PULL_REQUESTS")
     lock = envvar_as_bool("INPUT_LOCK")
     close = envvar_as_bool("INPUT_CLOSE")
 
@@ -40,11 +42,11 @@ try:
     with open(event_path) as jsonfile:
         event = json.load(jsonfile)
 
-    if event["type"] == "IssuesEvent" and event["action"] == "opened":
+    if "issue" in event and event["action"] == "opened":
         number: int = event["issue"]["number"]
         is_issue = True
-    elif event["type"] == "PullRequestEvent" and event["action"] in ("opened", "reopened"):
-        number: int = event["pull_request"]["number"]
+    elif "pull_request" in event and event["action"] in ("opened", "reopened"):
+        number: int = event["number"]
         is_issue = False
     else:
         print("Ah good, nothing to do here")
@@ -52,7 +54,9 @@ try:
 
     g = github.Github(token)
     g_repo = g.get_repo(repo)
-    g_issue = g_repo.get_issue(number) if is_issue else g_repo.get_pull(number).as_issue()
+    g_issue = (
+        g_repo.get_issue(number) if is_issue else g_repo.get_pull(number).as_issue()
+    )
     g_issue.create_comment(message)
 
     if lock:
