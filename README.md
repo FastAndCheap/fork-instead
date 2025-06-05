@@ -1,5 +1,14 @@
 # fork-instead
-Let others know that they should instead fork your repository and fix issues locally
+Your code is perfect as is - let others know that they should instead fork your
+repository and fix "issues" locally.
+
+## Disclaimer
+
+This GitHub Action, while functional, is written only for satirical purpose, and
+should not be used in collaborative repositories.  Collaborative programming,
+especially open source, is a beautiful thing and both contributors and maintainers
+should be treated respectfully for donating their time to improve projects.  Please
+do not use this GitHub Action in bad faith.
 
 ## Usage
 
