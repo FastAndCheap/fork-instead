@@ -40,11 +40,11 @@ try:
     with open(event_path) as jsonfile:
         event = json.load(jsonfile)
 
-    if event["type"] == "IssuesEvent" and event["action"] == "opened":
+    if "issue" in event and event["action"] == "opened":
         number: int = event["issue"]["number"]
         is_issue = True
-    elif event["type"] == "PullRequestEvent" and event["action"] in ("opened", "reopened"):
-        number: int = event["pull_request"]["number"]
+    elif "pull_request" in event and event["action"] in ("opened", "reopened"):
+        number: int = event["number"]
         is_issue = False
     else:
         print("Ah good, nothing to do here")
