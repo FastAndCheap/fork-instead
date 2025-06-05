@@ -18,7 +18,7 @@ import github
 
 def envvar_as_bool(envvar_name: str) -> bool:
     """Convert a string environment variable to a boolean."""
-    envvar = os.environ["INPUT_ASSIGN_TO_USER"].lower()
+    envvar = os.environ[envvar_name].lower()
     if envvar not in ("y", "yes", "n", "no", "true", "false", "on", "off"):
         print(f"'{envvar_name}' must be a YAML boolean value")
         sys.exit(1)
