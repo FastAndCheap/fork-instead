@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2023 Alec Delane5
+# SPDX-License-Identifier: MIT
+
+[project]
+name = "fork-instead"
+description = "Let others know that they should instead fork your repository and fix issues locally"
+version = "1.0.0"
+requires-python = ">=3.13.0"
+readme = "README.md"
+authors = [
+    {name = "Alec Delaney", email = "tekktrik@gmail.com"}
+]
+urls = {Homepage = "https://github.com/FastAndCheap/fork-instead"}
+license = "MIT"
+dependencies = [
+    "pygithub>=2.6.1",
+]
+
+[tool.ruff.lint]
+select = ["D", "PL", "I"]
+ignore = ["D213", "D203"]
