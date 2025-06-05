@@ -16,6 +16,7 @@ import sys
 
 import github
 
+
 def envvar_as_bool(envvar_name: str) -> bool:
     """Convert a string environment variable to a boolean."""
     envvar = os.environ[envvar_name].lower()
@@ -23,6 +24,7 @@ def envvar_as_bool(envvar_name: str) -> bool:
         print(f"'{envvar_name}' must be a YAML boolean value")
         sys.exit(1)
     return envvar in ("y", "yes", "true", "on")
+
 
 try:
     token = os.environ["INPUT_GITHUB_TOKEN"]
@@ -52,7 +54,9 @@ try:
 
     g = github.Github(token)
     g_repo = g.get_repo(repo)
-    g_issue = g_repo.get_issue(number) if is_issue else g_repo.get_pull(number).as_issue()
+    g_issue = (
+        g_repo.get_issue(number) if is_issue else g_repo.get_pull(number).as_issue()
+    )
     g_issue.create_comment(message)
 
     if lock:
