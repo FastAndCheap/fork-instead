@@ -30,7 +30,7 @@ try:
     message = os.environ["INPUT_MESSAGE"]
 
     on_issues = envvar_as_bool("INPUT_ON_ISSUES")
-    on_pull_requests = envvar_as_bool("INPUT_LABEL")
+    on_pull_requests = envvar_as_bool("INPUT_ON_PULL_REQUESTS")
     lock = envvar_as_bool("INPUT_LOCK")
     close = envvar_as_bool("INPUT_CLOSE")
 
