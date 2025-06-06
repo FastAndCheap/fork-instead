@@ -22,8 +22,8 @@ You can toggle responding to issues and pull requests individually by using the
 issues and pull requests.
 
 You can also toggle automatically locking the conversation and closing the issue or
-pull request using the `auto-lock` and `auto-close` options respectively.  The default
-behavior is to both lock and close.
+pull request using the `lock` and `close` options respectively.  The default behavior
+is to both lock and close.
 
 Note that a token with write permissions for issues and/or pull requests is required
 (as necessary).
