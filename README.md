@@ -44,7 +44,7 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-      - uses: FastAndCheap/fork-instead@main
+      - uses: FastAndCheap/fork-instead@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           on-issues: true
