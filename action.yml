@@ -14,7 +14,7 @@ inputs:
   github-token:
     description:
       The GitHub token needed to authenticate, must have write permessions
-      for issues
+      for issues and/or pull requests (as necessary)
     required: true
   message:
     description:
